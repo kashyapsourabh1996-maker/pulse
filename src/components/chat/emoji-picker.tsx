@@ -1,0 +1,81 @@
+'use client'
+
+import * as React from 'react'
+import { Smile } from 'lucide-react'
+
+const EMOJI_CATEGORIES: Record<string, string[]> = {
+  Smileys: ['😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃', '😉', '😊', '😇', '🥰', '😍', '🤩', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪', '😝', '🤑', '🤗', '🤭', '🤫', '🤔', '🤐', '🤨', '😐', '😑', '😶', '😏', '😒', '🙄', '😬', '😌', '😔', '😪', '🤤', '😴', '😷', '🤒', '🤕', '🤢', '🤮', '😎', '🤓', '🧐'],
+  Gestures: ['👍', '👎', '👌', '✌️', '🤞', '🤟', '🤘', '🤙', '👈', '👉', '👆', '👇', '☝️', '✋', '🤚', '🖐️', '🖖', '👋', '🤝', '👏', '🙌', '👐', '🤲', '🙏', '✍️', '💪', '🦾', '🦿', '🦵', '👂', '🦻', '👁️', '👅', '👄', '🦷'],
+  Hearts: ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍', '🤎', '💔', '❣️', '💕', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '♥️', '💯', '💢', '💥', '💫', '💦', '💨', '🕳️', '💣', '💬', '🗨️', '🗯️', '💭', '💤'],
+  Animals: ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐦', '🐤', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛', '🦋', '🐌', '🐞', '🐜', '🦗', '🕷️', '🦂', '🐢', '🐍', '🦎', '🦖', '🐙', '🦑', '🦐', '🦞', '🦀', '🐡', '🐠', '🐟', '🐬', '🐳', '🐋', '🦈', '🐊'],
+  Food: ['🍏', '🍎', '🍐', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🫐', '🍈', '🍒', '🍑', '🥭', '🍍', '🥥', '🥝', '🍅', '🍆', '🥑', '🥦', '🥬', '🥒', '🌶️', '🫑', '🌽', '🥕', '🫒', '🧄', '🧅', '🥔', '🍠', '🥐', '🥯', '🍞', '🥖', '🥨', '🧀', '🥚', '🍳', '🧇', '🥞', '🧈', '🍜', '🍝', '🍛', '🍲', '🍣', '🍱', '🥟', '🍚', '🍕', '🍔', '🍟', '🌭', '🥪', '🌮', '🌯', '☕', '🍵', '🥤', '🍺', '🍷', '🍰', '🎂', '🍦', '🍩', '🍪', '🍫', '🍬', '🍭'],
+  Travel: ['✈️', '🚗', '🚕', '🚙', '🚌', '🚎', '🏎️', '🚓', '🚑', '🚒', '🚐', '🚚', '🚛', '🚜', '🛵', '🏍️', '🚲', '🛴', '🚁', '🚂', '🚆', '🚊', '🚇', '🚢', '⛵', '🚤', '🛳️', '⛴️', '🚉', '🚆', '🗺️', '🗽', '🏰', '🏯', '🎡', '🎢', '🎠', '⛲', '⛱️', '🏖️', '🏝️', '🏔️', '🌋', '🏕️', '⛺', '🏠', '🏡', '🏢', '🏪'],
+  Activities: ['⚽', '🏀', '🏈', '⚾', '🥎', '🎾', '🏐', '🏉', '🥏', '🎱', '🪀', '🏓', '🏸', '🏒', '🥍', '🏏', '🥅', '⛳', '🏹', '🎣', '🥊', '🥋', '🎽', '⛸️', '🥌', '🛷', '🎿', '⛷️', '🏂', '🪂', '🏆', '🥇', '🥈', '🥉', '🏅', '🎖️', '🏵️', '🎗️', '🎫', '🎟️', '🎪', '🎭', '🎨', '🎬', '🎤', '🎧', '🎼', '🎵', '🎶', '🎸', '🎹', '🥁', '🎺', '🎻'],
+  Symbols: ['🔥', '✨', '⭐', '🌟', '💫', '💥', '🎉', '🎊', '🎈', '🎁', '🏆', '🥇', '🎯', '💎', '💰', '🪙', '💵', '💸', '💳', '📌', '📍', '✅', '❌', '❗', '❓', '⚠️', '🔴', '🟠', '🟡', '🟢', '🔵', '🟣', '⚫', '⚪', '🟤', '🔼', '🔽', '➡️', '⬅️', '⬆️', '⬇️', '♻️', '✳️', '❇️', '‼️', '⁉️', '🔚', '🔙', '🔛', '🔝', '🔜'],
+}
+
+export function EmojiPicker({ onPick, onClose }: { onPick: (emoji: string) => void; onClose: () => void }) {
+  const [active, setActive] = React.useState<string>('Smileys')
+  const ref = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose()
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [onClose])
+
+  return (
+    <div
+      ref={ref}
+      className="absolute bottom-14 left-0 w-[340px] max-w-[calc(100vw-2rem)] h-72 bg-white dark:bg-[#233138] rounded-lg shadow-2xl border border-[#e9edef] dark:border-[#2a3942] flex flex-col overflow-hidden z-50 wa-fade-in"
+    >
+      <div className="flex-1 overflow-y-auto wa-scroll p-2">
+        <div className="grid grid-cols-8 gap-1">
+          {EMOJI_CATEGORIES[active].map((emoji, i) => (
+            <button
+              key={`${emoji}-${i}`}
+              onClick={() => onPick(emoji)}
+              className="w-9 h-9 flex items-center justify-center text-xl hover:bg-[#f0f2f5] dark:hover:bg-[#2a3942] rounded transition"
+            >
+              {emoji}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="flex items-center gap-1 px-2 py-1.5 border-t border-[#e9edef] dark:border-[#2a3942] overflow-x-auto wa-scroll">
+        {Object.keys(EMOJI_CATEGORIES).map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActive(cat)}
+            className={`px-2.5 py-1 rounded text-xs whitespace-nowrap transition ${
+              active === cat
+                ? 'bg-[#25d366] text-white'
+                : 'text-[#667781] dark:text-[#8696a0] hover:bg-[#f0f2f5] dark:hover:bg-[#2a3942]'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export function EmojiPickerButton({ onPick }: { onPick: (emoji: string) => void }) {
+  const [open, setOpen] = React.useState(false)
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-10 h-10 flex items-center justify-center text-[#667781] dark:text-[#8696a0] hover:text-[#111b21] dark:hover:text-[#e9edef] transition rounded-full"
+        aria-label="Emoji"
+      >
+        <Smile className="w-6 h-6" />
+      </button>
+      {open && <EmojiPicker onPick={(e) => { onPick(e); }} onClose={() => setOpen(false)} />}
+    </div>
+  )
+}

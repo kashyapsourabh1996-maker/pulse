@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(cuid())
+  phone      String   @unique
+  name       String
+  avatar     String?
+  about      String   @default("Hey there! I am using WhatsApp.")
+  presence   String   @default("offline") // online | offline
+  lastSeen   DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  participants Participant[]
+  messages     Message[]
+  stories      Story[]
+  storyViews   StoryView[]
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  name      String? // for groups
+  avatar    String? // for groups
+  about     String?
+  isGroup   Boolean  @default(false)
+  createdBy String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  participants Participant[]
+  messages     Message[]
+}
+
+model Participant {
+  id             String   @id @default(cuid())
+  userId         String
+  conversationId String
+  joinedAt       DateTime @default(now())
+  lastReadAt     DateTime?
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, conversationId])
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  senderId       String
+  content        String
+  type           String   @default("text") // text | image | audio | file | system
+  mediaUrl       String?
+  status         String   @default("sent") // sent | delivered | read
+  createdAt      DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+}
+
+model Story {
+  id        String   @id @default(cuid())
+  userId    String
+  content   String
+  type      String   @default("text") // text | image
+  bgColor   String?
+  mediaUrl  String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  user    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  viewers StoryView[]
+}
+
+model StoryView {
+  id       String   @id @default(cuid())
+  storyId  String
+  userId   String
+  viewedAt DateTime @default(now())
+
+  story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([storyId, userId])
+}
