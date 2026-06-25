@@ -61,6 +61,7 @@ start-chat-service.sh
 chat-service.log
 worklog.md
 tmp-*.ts
+/download/
 
 # Skills directory
 /skills/
