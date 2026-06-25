@@ -1,0 +1,59 @@
+# Render Blueprint — deploy all of Pulse on Render with ONE click.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# How to use:
+#   1. Push this repo to GitHub
+#   2. Go to https://dashboard.render.com → "New" → "Blueprint"
+#   3. Select your repo. Render reads this file and creates everything.
+#   4. After deploy, set NEXT_PUBLIC_SOCKET_URL to the socket service URL (see GET-LIVE-URL.md).
+
+services:
+  # ---- PostgreSQL database ----
+  - type: postgres
+    name: pulse-db
+    plan: free
+    ipAllowList: []   # allow all (Render services can connect)
+
+  # ---- Next.js web app ----
+  - type: web
+    name: pulse-web
+    runtime: node
+    plan: free
+    buildCommand: bun install && bun run db:generate
+    startCommand: bun run start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: pulse-db
+          property: connectionString
+      - key: NEXT_PUBLIC_SOCKET_URL
+        # UPDATE THIS after the socket service below gets its URL.
+        # Format: https://pulse-socket.onrender.com
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: BUN_VERSION
+        value: "1.1.0"
+
+  # ---- Socket.io real-time service ----
+  - type: web
+    name: pulse-socket
+    runtime: node
+    plan: free
+    rootDir: mini-services/chat-service
+    buildCommand: bun install
+    startCommand: bun run start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: SOCKET_PATH
+        value: /socket.io
+      - key: SOCKET_CORS_ORIGIN
+        # UPDATE THIS to your pulse-web URL after deploy: https://pulse-web.onrender.com
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: BUN_VERSION
+        value: "1.1.0"
