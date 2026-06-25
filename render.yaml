@@ -1,19 +1,18 @@
-# Render Blueprint — deploy all of Pulse on Render with ONE click.
-# Docs: https://render.com/docs/blueprint-spec
+# Render Blueprint — deploy Pulse's two web services on Render.
+#
+# PostgreSQL is NOT included here because Render discontinued free Postgres.
+# Instead, create a FREE Postgres database at https://neon.tech (takes 1 min),
+# then paste the connection string into the DATABASE_URL env var on Render.
+# See GET-LIVE-URL.md for full instructions.
 #
 # How to use:
 #   1. Push this repo to GitHub
-#   2. Go to https://dashboard.render.com → "New" → "Blueprint"
-#   3. Select your repo. Render reads this file and creates everything.
-#   4. After deploy, set NEXT_PUBLIC_SOCKET_URL (see GET-LIVE-URL.md Step 6).
+#   2. Create a free Postgres at https://neon.tech → copy the connection string
+#   3. Go to https://dashboard.render.com → "New" → "Blueprint" → select this repo
+#   4. Render creates pulse-web + pulse-socket
+#   5. Set DATABASE_URL, NEXT_PUBLIC_SOCKET_URL, SOCKET_CORS_ORIGIN (see GET-LIVE-URL.md)
 
 services:
-  # ---- PostgreSQL database ----
-  - type: postgres
-    name: pulse-db
-    plan: free
-    ipAllowList: []   # allow all (Render services can connect)
-
   # ---- Next.js web app ----
   - type: web
     name: pulse-web
@@ -25,12 +24,11 @@ services:
     autoDeploy: true
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: pulse-db
-          property: connectionString
+        # PASTE YOUR NEON POSTGRES CONNECTION STRING HERE (from https://neon.tech)
+        # Format: postgresql://user:pass@ep-xxx.neon.tech/pulse?sslmode=require
+        sync: false
       - key: NEXT_PUBLIC_SOCKET_URL
-        # UPDATE THIS after the socket service below gets its URL.
-        # Format: https://pulse-socket.onrender.com
+        # SET AFTER DEPLOY: your pulse-socket URL (https://pulse-socket-xxx.onrender.com)
         sync: false
       - key: NODE_ENV
         value: production
@@ -49,7 +47,7 @@ services:
       - key: SOCKET_PATH
         value: /socket.io
       - key: SOCKET_CORS_ORIGIN
-        # UPDATE THIS to your pulse-web URL after deploy: https://pulse-web.onrender.com
+        # SET AFTER DEPLOY: your pulse-web URL (https://pulse-web-xxx.onrender.com)
         sync: false
       - key: NODE_ENV
         value: production
