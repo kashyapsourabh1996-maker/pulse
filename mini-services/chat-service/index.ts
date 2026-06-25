@@ -88,7 +88,20 @@ const socketToUser = new Map<string, string>() // socketId -> userId
 // HTTP + Socket.io server
 // ---------------------------------------------------------------------------
 
-const httpServer = createServer()
+const httpServer = createServer((req, res) => {
+  // Health check endpoint for Render / uptime monitors.
+  // Returns 200 for GET /health and GET / (when not a socket.io polling request).
+  const url = new URL(req.url ?? '/', `http://${req.headers.host ?? 'localhost'}`)
+  const isHealth = url.pathname === '/health' || url.pathname === '/'
+  const isSocketPolling = url.searchParams.has('EIO') || url.pathname.startsWith('/socket.io')
+  if (isHealth && !isSocketPolling && req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify({ status: 'ok', service: 'pulse-socket', time: new Date().toISOString() }))
+    return
+  }
+  res.writeHead(404, { 'Content-Type': 'application/json' })
+  res.end(JSON.stringify({ error: 'Not found' }))
+})
 
 // Path: '/' for the sandbox Caddy gateway, '/socket.io' (default) for production nginx.
 // Set SOCKET_PATH to override if needed.

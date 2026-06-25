@@ -5,7 +5,7 @@
 #   1. Push this repo to GitHub
 #   2. Go to https://dashboard.render.com → "New" → "Blueprint"
 #   3. Select your repo. Render reads this file and creates everything.
-#   4. After deploy, set NEXT_PUBLIC_SOCKET_URL to the socket service URL (see GET-LIVE-URL.md).
+#   4. After deploy, set NEXT_PUBLIC_SOCKET_URL (see GET-LIVE-URL.md Step 6).
 
 services:
   # ---- PostgreSQL database ----
@@ -19,8 +19,8 @@ services:
     name: pulse-web
     runtime: node
     plan: free
-    buildCommand: bun install && bun run db:generate
-    startCommand: bun run start
+    buildCommand: bun install && bun run build && bun run db:generate
+    startCommand: bunx next start -p $PORT
     healthCheckPath: /api/health
     autoDeploy: true
     envVars:
@@ -34,8 +34,6 @@ services:
         sync: false
       - key: NODE_ENV
         value: production
-      - key: BUN_VERSION
-        value: "1.1.0"
 
   # ---- Socket.io real-time service ----
   - type: web
@@ -45,7 +43,7 @@ services:
     rootDir: mini-services/chat-service
     buildCommand: bun install
     startCommand: bun run start
-    healthCheckPath: /
+    healthCheckPath: /health
     autoDeploy: true
     envVars:
       - key: SOCKET_PATH
@@ -55,5 +53,3 @@ services:
         sync: false
       - key: NODE_ENV
         value: production
-      - key: BUN_VERSION
-        value: "1.1.0"
