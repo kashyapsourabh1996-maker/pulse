@@ -103,3 +103,31 @@ Stage Summary:
 - Real-time features confirmed working: presence, message delivery, read receipts, typing indicators
 - Dev log clean (no errors), lint clean (0 errors, 0 warnings)
 - Socket service stable on :3003, Next.js on :3000, Caddy gateway on :81
+
+---
+Task ID: 7 (Main — deployment prep)
+Agent: Main (Z.ai Code)
+Task: Prep Pulse for production deployment on user's own domain
+
+Work Log:
+- Created .env.example with all documented env vars (DATABASE_URL, NEXT_PUBLIC_SOCKET_URL with 3 modes, SOCKET_PORT)
+- Created mini-services/chat-service/.env.example (SOCKET_PORT, SOCKET_PATH, SOCKET_CORS_ORIGIN)
+- Refactored src/lib/chat/socket.ts to support 3 connection modes: sandbox (Caddy gateway), same-origin (nginx proxy), separate-domain (Vercel+Railway)
+- Made socket service port configurable: SOCKET_PORT > PORT > 3003 (works in sandbox + Railway/Render)
+- Made socket.io path configurable: SOCKET_PATH (default "/" for sandbox, "/socket.io" for production)
+- Added SOCKET_CORS_ORIGIN env var for production CORS lockdown
+- Added /api/health endpoint (returns status + db health + timestamp) for uptime monitors
+- Wrote DEPLOYMENT.md: Option A (Vercel+Railway+Neon, easiest) and Option B (VPS+PM2+nginx, full control) with step-by-step instructions, SSL setup, domain config, troubleshooting
+- Wrote README.md: quick start, tech stack, scripts, project structure, security checklist
+- Created ecosystem.config.cjs (PM2 config for VPS — runs both Next.js + socket service)
+- Created nginx.conf.example (reverse proxy config routing / → Next.js, /socket.io/ → socket service, with WebSocket upgrade headers)
+- Updated .gitignore: allow .env.example through, exclude db/*.db, sandbox-specific files (start-chat-service.sh, worklog.md, logs)
+- Verified: lint clean (0 errors), homepage HTTP 200, /api/health returns {"status":"ok","db":"ok","app":"pulse"}, socket service still running on 3003, browser loads "Pulse" with chat list
+
+Stage Summary:
+- Pulse is now deployment-ready for any hosting platform
+- Two clear deployment paths documented (Vercel+Railway for beginners, VPS for control)
+- All env vars documented with examples
+- Code is portable: socket URL/path/port/CORS all configurable
+- No sandbox-specific assumptions remain in the code (only in .gitignore exclusions)
+- Files added: .env.example, mini-services/chat-service/.env.example, DEPLOYMENT.md, README.md, ecosystem.config.cjs, nginx.conf.example, src/app/api/health/route.ts

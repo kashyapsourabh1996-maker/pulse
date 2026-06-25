@@ -2,7 +2,7 @@ import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
 /**
- * Chat Socket Service — thin real-time relay for the WhatsApp-style chat app.
+ * Chat Socket Service — thin real-time relay for the Pulse chat app.
  *
  * Responsibilities:
  *  - Track online presence (in-memory only; DB persistence handled by Next.js API).
@@ -10,8 +10,13 @@ import { Server, Socket } from 'socket.io'
  *      send-message, typing, stop-typing, read-messages, message-status
  *  - Broadcast presence updates (online/offline) to all clients.
  *
- * Runs on fixed port 3003. The Caddy gateway forwards "/" with
- * ?XTransformPort=3003 to this service.
+ * Port selection (in priority order):
+ *   1. SOCKET_PORT env var  (explicit override)
+ *   2. PORT env var         (set by Railway/Render/Heroku)
+ *   3. 3003                 (default — used in the sandbox)
+ *
+ * In the sandbox, the Caddy gateway forwards "/" with ?XTransformPort=3003.
+ * In production behind nginx, route /socket.io/ to this service's port.
  */
 
 // ---------------------------------------------------------------------------
@@ -84,18 +89,27 @@ const socketToUser = new Map<string, string>() // socketId -> userId
 // ---------------------------------------------------------------------------
 
 const httpServer = createServer()
+
+// Path: '/' for the sandbox Caddy gateway, '/socket.io' (default) for production nginx.
+// Set SOCKET_PATH to override if needed.
+const SOCKET_PATH = process.env.SOCKET_PATH ?? '/'
+
+// Allowed origins for CORS. Set SOCKET_CORS_ORIGIN to your frontend URL in production
+// (e.g. "https://pulse.yourdomain.com"). Defaults to "*" for development.
+const CORS_ORIGIN = process.env.SOCKET_CORS_ORIGIN ?? '*'
+
 const io = new Server(httpServer, {
-  // DO NOT change the path — Caddy gateway relies on this.
-  path: '/',
+  path: SOCKET_PATH,
   cors: {
-    origin: '*',
+    origin: CORS_ORIGIN,
     methods: ['GET', 'POST'],
   },
   pingTimeout: 60000,
   pingInterval: 25000,
 })
 
-const PORT = 3003
+// Port: SOCKET_PORT > PORT (auto-set by PaaS) > 3003 default
+const PORT = Number(process.env.SOCKET_PORT ?? process.env.PORT ?? 3003)
 
 // ---------------------------------------------------------------------------
 // Helpers
