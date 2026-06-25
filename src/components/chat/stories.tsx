@@ -44,7 +44,7 @@ export function StoriesPanel({
           <div className="relative">
             <Avatar name={meName} src={meAvatar} size={48} />
             {!hasMyStory && (
-              <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#25d366] border-2 border-white dark:border-[#111b21] flex items-center justify-center">
+              <span className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#B91C1C] border-2 border-white dark:border-[#111b21] flex items-center justify-center">
                 <Plus className="w-3 h-3 text-white" strokeWidth={3} />
               </span>
             )}
@@ -94,9 +94,9 @@ export function StoriesPanel({
         <div className="p-4">
           <button
             onClick={() => setComposing(true)}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-[#25d366]/10 hover:bg-[#25d366]/20 transition text-left"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-[#B91C1C]/10 hover:bg-[#B91C1C]/20 transition text-left"
           >
-            <div className="w-12 h-12 rounded-full bg-[#25d366] flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-full bg-[#B91C1C] flex items-center justify-center shrink-0">
               <PenLine className="w-6 h-6 text-white" />
             </div>
             <div>

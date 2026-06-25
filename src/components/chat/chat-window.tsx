@@ -112,7 +112,7 @@ export function ChatWindow({
           <div className="min-w-0">
             <div className="font-medium text-[#111b21] dark:text-[#e9edef] truncate">{name}</div>
             <div className="text-xs text-[#667781] dark:text-[#8696a0] truncate">
-              {typingUser ? <span className="text-[#25d366]">typing...</span> : presenceText}
+              {typingUser ? <span className="text-[#B91C1C]">typing...</span> : presenceText}
             </div>
           </div>
         </button>
@@ -178,7 +178,7 @@ export function ChatWindow({
                     <div
                       className={`relative max-w-[75%] md:max-w-[65%] px-2.5 py-1.5 rounded-lg shadow-sm ${
                         mine
-                          ? 'bg-[#d9fdd3] dark:bg-[#005c4b] text-[#111b21] dark:text-[#e9edef] rounded-tr-none'
+                          ? 'bg-[#fee2e2] dark:bg-[#651010] text-[#111b21] dark:text-[#e9edef] rounded-tr-none'
                           : 'bg-white dark:bg-[#202c33] text-[#111b21] dark:text-[#e9edef] rounded-tl-none'
                       } ${showTail ? tailClass : ''}`}
                       style={{ marginLeft: mine ? 0 : 8, marginRight: mine ? 8 : 0 }}
@@ -289,7 +289,7 @@ export function ChatWindow({
           {input.trim() ? (
             <button
               onClick={handleSend}
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-[#25d366] hover:bg-[#1da851] transition shadow-md"
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-[#B91C1C] hover:bg-[#991111] transition shadow-md"
               aria-label="Send"
             >
               <Send className="w-5 h-5 text-white" />
@@ -297,7 +297,7 @@ export function ChatWindow({
           ) : (
             <button
               onClick={() => onSend('🎤 Voice message', 'audio')}
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-[#25d366] hover:bg-[#1da851] transition shadow-md"
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-[#B91C1C] hover:bg-[#991111] transition shadow-md"
               aria-label="Voice message"
             >
               <Mic className="w-5 h-5 text-white" />

@@ -81,7 +81,7 @@ export function InfoPanel({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-[#008069] dark:bg-[#005c4b] text-white px-4 py-4 flex items-center gap-4 shrink-0">
+        <div className="bg-[#7f1d1d] dark:bg-[#651010] text-white px-4 py-4 flex items-center gap-4 shrink-0">
           <button onClick={onClose} className="hover:opacity-80">
             <X className="w-6 h-6" />
           </button>
@@ -94,7 +94,7 @@ export function InfoPanel({
             <div className="relative">
               <Avatar name={display.name} src={display.avatar} size={180} />
               {isMyProfile && (
-                <button className="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-[#008069] flex items-center justify-center shadow-lg">
+                <button className="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-[#7f1d1d] flex items-center justify-center shadow-lg">
                   <Camera className="w-5 h-5 text-white" />
                 </button>
               )}
@@ -105,10 +105,10 @@ export function InfoPanel({
                   <input
                     value={nameVal}
                     onChange={(e) => setNameVal(e.target.value)}
-                    className="text-2xl font-medium bg-transparent border-b-2 border-[#008069] text-[#111b21] dark:text-[#e9edef] outline-none text-center"
+                    className="text-2xl font-medium bg-transparent border-b-2 border-[#7f1d1d] text-[#111b21] dark:text-[#e9edef] outline-none text-center"
                     autoFocus
                   />
-                  <button onClick={saveName} className="text-[#008069]">
+                  <button onClick={saveName} className="text-[#7f1d1d]">
                     <Check className="w-6 h-6" />
                   </button>
                 </div>
@@ -116,7 +116,7 @@ export function InfoPanel({
                 <div className="flex items-center justify-center gap-2">
                   <h3 className="text-2xl font-medium text-[#111b21] dark:text-[#e9edef]">{display.name}</h3>
                   {isMyProfile && (
-                    <button onClick={() => setEditingName(true)} className="text-[#667781] hover:text-[#008069]">
+                    <button onClick={() => setEditingName(true)} className="text-[#667781] hover:text-[#7f1d1d]">
                       <Edit3 className="w-4 h-4" />
                     </button>
                   )}
@@ -134,11 +134,11 @@ export function InfoPanel({
                 <input
                   value={aboutVal}
                   onChange={(e) => setAboutVal(e.target.value)}
-                  className="flex-1 text-sm bg-transparent border-b-2 border-[#008069] text-[#111b21] dark:text-[#e9edef] outline-none py-1"
+                  className="flex-1 text-sm bg-transparent border-b-2 border-[#7f1d1d] text-[#111b21] dark:text-[#e9edef] outline-none py-1"
                   autoFocus
                   maxLength={139}
                 />
-                <button onClick={saveAbout} className="text-[#008069]">
+                <button onClick={saveAbout} className="text-[#7f1d1d]">
                   <Check className="w-5 h-5" />
                 </button>
               </div>
@@ -146,7 +146,7 @@ export function InfoPanel({
               <div className="flex items-center justify-between gap-2">
                 <p className="text-sm text-[#111b21] dark:text-[#e9edef]">{display.about || 'Hey there! I am using WhatsApp.'}</p>
                 {isMyProfile && (
-                  <button onClick={() => setEditingAbout(true)} className="text-[#667781] hover:text-[#008069] shrink-0">
+                  <button onClick={() => setEditingAbout(true)} className="text-[#667781] hover:text-[#7f1d1d] shrink-0">
                     <Edit3 className="w-4 h-4" />
                   </button>
                 )}
@@ -159,19 +159,19 @@ export function InfoPanel({
             <div className="flex justify-around py-4 border-b border-[#e9edef] dark:border-[#222e35]">
               <button
                 onClick={() => onCallToast('voice')}
-                className="flex flex-col items-center gap-1 text-[#008069] dark:text-[#00a884] hover:opacity-80"
+                className="flex flex-col items-center gap-1 text-[#7f1d1d] dark:text-[#B91C1C] hover:opacity-80"
               >
                 <Phone className="w-5 h-5" />
                 <span className="text-xs">Call</span>
               </button>
               <button
                 onClick={() => onCallToast('video')}
-                className="flex flex-col items-center gap-1 text-[#008069] dark:text-[#00a884] hover:opacity-80"
+                className="flex flex-col items-center gap-1 text-[#7f1d1d] dark:text-[#B91C1C] hover:opacity-80"
               >
                 <Video className="w-5 h-5" />
                 <span className="text-xs">Video</span>
               </button>
-              <button className="flex flex-col items-center gap-1 text-[#008069] dark:text-[#00a884] hover:opacity-80">
+              <button className="flex flex-col items-center gap-1 text-[#7f1d1d] dark:text-[#B91C1C] hover:opacity-80">
                 <Search className="w-5 h-5" />
                 <span className="text-xs">Search</span>
               </button>

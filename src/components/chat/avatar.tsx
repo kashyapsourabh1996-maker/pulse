@@ -49,7 +49,7 @@ export function Avatar({ name, src, size = 40, className = '', online = false }:
       )}
       {online && (
         <span
-          className="absolute bottom-0 right-0 block rounded-full border-2 border-white dark:border-[#111b21] bg-[#25d366]"
+          className="absolute bottom-0 right-0 block rounded-full border-2 border-white dark:border-[#111b21] bg-[#B91C1C]"
           style={{ width: size * 0.28, height: size * 0.28 }}
         />
       )}

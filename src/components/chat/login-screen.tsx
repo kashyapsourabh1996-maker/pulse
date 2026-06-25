@@ -59,7 +59,7 @@ export function LoginScreen() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Rahul Kumar"
-              className="w-full px-4 py-3 rounded-lg bg-[#f0f2f5] dark:bg-[#202c33] text-[#111b21] dark:text-[#e9edef] placeholder:text-[#8696a0] outline-none focus:ring-2 focus:ring-[#25d366] transition"
+              className="w-full px-4 py-3 rounded-lg bg-[#f0f2f5] dark:bg-[#202c33] text-[#111b21] dark:text-[#e9edef] placeholder:text-[#8696a0] outline-none focus:ring-2 focus:ring-[#B91C1C] transition"
               autoFocus
               maxLength={40}
             />
@@ -68,7 +68,7 @@ export function LoginScreen() {
             <label className="text-sm font-medium text-[#667781] dark:text-[#8696a0] flex items-center gap-2">
               <Phone className="w-4 h-4" /> Phone Number
             </label>
-            <div className="flex items-center rounded-lg bg-[#f0f2f5] dark:bg-[#202c33] focus-within:ring-2 focus-within:ring-[#25d366] transition">
+            <div className="flex items-center rounded-lg bg-[#f0f2f5] dark:bg-[#202c33] focus-within:ring-2 focus-within:ring-[#B91C1C] transition">
               <span className="pl-4 pr-2 text-[#667781] dark:text-[#8696a0] font-medium select-none">
                 +91
               </span>
@@ -86,7 +86,7 @@ export function LoginScreen() {
           <button
             type="submit"
             disabled={loading || !name.trim() || phone.length < 10}
-            className="w-full py-3 rounded-lg bg-[#25d366] hover:bg-[#1da851] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition flex items-center justify-center gap-2"
+            className="w-full py-3 rounded-lg bg-[#B91C1C] hover:bg-[#991111] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition flex items-center justify-center gap-2"
           >
             {loading ? (
               <>

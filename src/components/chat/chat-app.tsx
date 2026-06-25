@@ -467,7 +467,7 @@ export function ChatApp({ me, theme, onToggleTheme, onLogout, onProfileUpdate }:
             onClick={() => setTab('chats')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition ${
               tab === 'chats'
-                ? 'bg-[#25d366] text-white'
+                ? 'bg-[#B91C1C] text-white'
                 : 'text-[#54656f] dark:text-[#8696a0] hover:bg-black/5 dark:hover:bg-white/10'
             }`}
           >
@@ -477,7 +477,7 @@ export function ChatApp({ me, theme, onToggleTheme, onLogout, onProfileUpdate }:
             onClick={() => setTab('status')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition ${
               tab === 'status'
-                ? 'bg-[#25d366] text-white'
+                ? 'bg-[#B91C1C] text-white'
                 : 'text-[#54656f] dark:text-[#8696a0] hover:bg-black/5 dark:hover:bg-white/10'
             }`}
           >
@@ -509,7 +509,7 @@ export function ChatApp({ me, theme, onToggleTheme, onLogout, onProfileUpdate }:
               Send and receive messages without keeping your phone online. Select a chat from the left to start messaging, or create a new conversation.
             </p>
             <div className="mt-8 flex items-center gap-2 text-xs text-[#667781] dark:text-[#8696a0]">
-              <span className="w-2 h-2 rounded-full bg-[#25d366] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#B91C1C] animate-pulse" />
               <span>End-to-end encrypted</span>
             </div>
           </div>

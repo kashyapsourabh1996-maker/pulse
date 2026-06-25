@@ -106,7 +106,7 @@ export function ChatList({
       <div className="px-3 py-2 bg-white dark:bg-[#111b21] shrink-0">
         <div
           className={`flex items-center gap-3 px-3 py-1.5 rounded-lg bg-[#f0f2f5] dark:bg-[#202c33] transition ${
-            searchFocused ? 'ring-2 ring-[#25d366]' : ''
+            searchFocused ? 'ring-2 ring-[#B91C1C]' : ''
           }`}
         >
           {searchFocused ? (
@@ -142,9 +142,9 @@ export function ChatList({
             <Avatar name={me.name} src={me.avatar} size={48} online />
             <div className="flex-1 min-w-0">
               <div className="font-medium text-[#111b21] dark:text-[#e9edef] truncate">{me.name} (You)</div>
-              <div className="text-xs text-[#25d366] truncate">{me.about}</div>
+              <div className="text-xs text-[#B91C1C] truncate">{me.about}</div>
             </div>
-            <Circle className="w-2 h-2 fill-[#25d366] text-[#25d366]" />
+            <Circle className="w-2 h-2 fill-[#B91C1C] text-[#B91C1C]" />
           </button>
         )}
 
@@ -153,7 +153,7 @@ export function ChatList({
           onClick={onNewChat}
           className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#f5f6f6] dark:hover:bg-[#2a3942] transition text-left"
         >
-          <div className="w-12 h-12 rounded-full bg-[#25d366] flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-full bg-[#B91C1C] flex items-center justify-center shrink-0">
             <MessageSquarePlus className="w-6 h-6 text-white" />
           </div>
           <div className="flex-1 min-w-0">
@@ -200,7 +200,7 @@ export function ChatList({
                     {last && (
                       <span
                         className={`text-xs shrink-0 ${
-                          c.unreadCount > 0 ? 'text-[#25d366] font-semibold' : 'text-[#667781] dark:text-[#8696a0]'
+                          c.unreadCount > 0 ? 'text-[#B91C1C] font-semibold' : 'text-[#667781] dark:text-[#8696a0]'
                         }`}
                       >
                         {formatChatListTime(last.createdAt)}
@@ -213,7 +213,7 @@ export function ChatList({
                       <span className="truncate">{lastText}</span>
                     </span>
                     {c.unreadCount > 0 && (
-                      <span className="shrink-0 min-w-[20px] h-5 px-1.5 rounded-full bg-[#25d366] text-white text-xs font-semibold flex items-center justify-center">
+                      <span className="shrink-0 min-w-[20px] h-5 px-1.5 rounded-full bg-[#B91C1C] text-white text-xs font-semibold flex items-center justify-center">
                         {c.unreadCount}
                       </span>
                     )}

@@ -29,7 +29,7 @@ export function NewChatDialog({ open, onClose, users, onSelect }: NewChatDialogP
         className="bg-white dark:bg-[#111b21] rounded-lg shadow-2xl w-full max-w-md h-[80vh] flex flex-col overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-[#008069] dark:bg-[#005c4b] text-white px-4 py-4 shrink-0">
+        <div className="bg-[#7f1d1d] dark:bg-[#651010] text-white px-4 py-4 shrink-0">
           <div className="flex items-center gap-4 mb-4">
             <button onClick={onClose} className="hover:opacity-80">
               <X className="w-6 h-6" />
@@ -121,7 +121,7 @@ export function NewGroupDialog({ open, onClose, users, onCreate }: NewGroupDialo
       >
         {step === 'select' ? (
           <>
-            <div className="bg-[#008069] dark:bg-[#005c4b] text-white px-4 py-4 shrink-0">
+            <div className="bg-[#7f1d1d] dark:bg-[#651010] text-white px-4 py-4 shrink-0">
               <div className="flex items-center gap-4 mb-4">
                 <button onClick={onClose} className="hover:opacity-80">
                   <X className="w-6 h-6" />
@@ -152,7 +152,7 @@ export function NewGroupDialog({ open, onClose, users, onCreate }: NewGroupDialo
                   >
                     <div className="relative">
                       <Avatar name={u.name} src={u.avatar} size={44} />
-                      <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#008069] text-white flex items-center justify-center">
+                      <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#7f1d1d] text-white flex items-center justify-center">
                         <X className="w-2.5 h-2.5" />
                       </span>
                     </div>
@@ -180,7 +180,7 @@ export function NewGroupDialog({ open, onClose, users, onCreate }: NewGroupDialo
                     <span
                       className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
                         checked
-                          ? 'bg-[#008069] border-[#008069]'
+                          ? 'bg-[#7f1d1d] border-[#7f1d1d]'
                           : 'border-[#cbd5d8] dark:border-[#3b4a54]'
                       }`}
                     >
@@ -194,7 +194,7 @@ export function NewGroupDialog({ open, onClose, users, onCreate }: NewGroupDialo
               <button
                 disabled={selected.size < 1}
                 onClick={() => setStep('name')}
-                className="w-full py-3 rounded-full bg-[#008069] dark:bg-[#00a884] text-white font-medium disabled:opacity-40 hover:opacity-90 transition flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-full bg-[#7f1d1d] dark:bg-[#B91C1C] text-white font-medium disabled:opacity-40 hover:opacity-90 transition flex items-center justify-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4 rotate-180" /> Next ({selected.size})
               </button>
@@ -202,7 +202,7 @@ export function NewGroupDialog({ open, onClose, users, onCreate }: NewGroupDialo
           </>
         ) : (
           <>
-            <div className="bg-[#008069] dark:bg-[#005c4b] text-white px-4 py-4 shrink-0">
+            <div className="bg-[#7f1d1d] dark:bg-[#651010] text-white px-4 py-4 shrink-0">
               <div className="flex items-center gap-4">
                 <button onClick={() => setStep('select')} className="hover:opacity-80">
                   <ArrowLeft className="w-6 h-6" />
@@ -212,14 +212,14 @@ export function NewGroupDialog({ open, onClose, users, onCreate }: NewGroupDialo
             </div>
             <div className="flex-1 overflow-y-auto wa-scroll p-6">
               <div className="flex flex-col items-center gap-4">
-                <div className="w-24 h-24 rounded-full bg-[#008069] flex items-center justify-center">
+                <div className="w-24 h-24 rounded-full bg-[#7f1d1d] flex items-center justify-center">
                   <Camera className="w-10 h-10 text-white" />
                 </div>
                 <input
                   value={groupName}
                   onChange={(e) => setGroupName(e.target.value)}
                   placeholder="Group subject"
-                  className="w-full text-center border-b-2 border-[#008069] bg-transparent py-2 text-lg text-[#111b21] dark:text-[#e9edef] outline-none"
+                  className="w-full text-center border-b-2 border-[#7f1d1d] bg-transparent py-2 text-lg text-[#111b21] dark:text-[#e9edef] outline-none"
                   autoFocus
                   maxLength={50}
                 />
@@ -232,7 +232,7 @@ export function NewGroupDialog({ open, onClose, users, onCreate }: NewGroupDialo
               <button
                 disabled={!groupName.trim()}
                 onClick={() => onCreate(groupName.trim(), Array.from(selected))}
-                className="w-full py-3 rounded-full bg-[#008069] dark:bg-[#00a884] text-white font-medium disabled:opacity-40 hover:opacity-90 transition"
+                className="w-full py-3 rounded-full bg-[#7f1d1d] dark:bg-[#B91C1C] text-white font-medium disabled:opacity-40 hover:opacity-90 transition"
               >
                 Create group
               </button>

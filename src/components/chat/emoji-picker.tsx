@@ -51,7 +51,7 @@ export function EmojiPicker({ onPick, onClose }: { onPick: (emoji: string) => vo
             onClick={() => setActive(cat)}
             className={`px-2.5 py-1 rounded text-xs whitespace-nowrap transition ${
               active === cat
-                ? 'bg-[#25d366] text-white'
+                ? 'bg-[#B91C1C] text-white'
                 : 'text-[#667781] dark:text-[#8696a0] hover:bg-[#f0f2f5] dark:hover:bg-[#2a3942]'
             }`}
           >
