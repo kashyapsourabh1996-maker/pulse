@@ -25,7 +25,7 @@ export function LoginScreen() {
         body: JSON.stringify({ name: name.trim(), phone: phone.trim() }),
       })
       if (!res.ok) throw new Error('Login failed')
-      toast.success('Welcome to ZappChat!')
+      toast.success('Welcome to Pulse!')
       router.refresh()
     } catch {
       toast.error('Something went wrong. Try again.')
@@ -38,14 +38,12 @@ export function LoginScreen() {
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#f0f2f5] dark:bg-[#0b141a] px-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center text-center mb-8">
-          <div className="w-20 h-20 rounded-full bg-[#25d366] flex items-center justify-center mb-4 shadow-lg">
-            <MessageCircle className="w-10 h-10 text-white" strokeWidth={2.5} />
-          </div>
-          <h1 className="text-3xl font-bold text-[#111b21] dark:text-[#e9edef]">ZappChat</h1>
+          <img src="/pulse-logo.jpg" alt="Pulse logo" className="w-24 h-24 rounded-3xl object-cover mb-4 shadow-lg" />
+          <h1 className="text-3xl font-bold text-[#111b21] dark:text-[#e9edef]">Pulse</h1>
           <p className="text-[#667781] dark:text-[#8696a0] mt-2 text-sm">
             Send and receive messages without keeping your phone online.
             <br />
-            Use ZappChat on up to 2 devices and 1 phone at the same time.
+            Use Pulse on up to 2 devices and 1 phone at the same time.
           </p>
         </div>
 

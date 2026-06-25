@@ -16,12 +16,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ZappChat — WhatsApp-style Messaging",
-  description: "A WhatsApp-style real-time chat app built with Next.js, Prisma & Socket.io. Send messages, create groups, share status updates.",
-  keywords: ["ZappChat", "chat", "messaging", "WhatsApp", "real-time", "Next.js"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "Pulse — Real-time Messaging",
+  description: "Pulse is a fast, real-time messaging app. Send messages, create groups, share status updates, and stay connected.",
+  keywords: ["Pulse", "chat", "messaging", "real-time", "Next.js"],
+  authors: [{ name: "Pulse Team" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/pulse-logo.jpg",
   },
 };
 

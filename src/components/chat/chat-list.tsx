@@ -58,7 +58,10 @@ export function ChatList({
     <div className="flex flex-col h-full bg-white dark:bg-[#111b21]">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-[#f0f2f5] dark:bg-[#202c33] shrink-0">
-        <h1 className="text-lg font-semibold text-[#111b21] dark:text-[#e9edef]">ZappChat</h1>
+        <div className="flex items-center gap-2">
+          <img src="/pulse-logo.jpg" alt="" className="w-8 h-8 rounded-lg object-cover" />
+          <h1 className="text-lg font-semibold text-[#111b21] dark:text-[#e9edef]">Pulse</h1>
+        </div>
         <div className="flex items-center gap-1">
           <button
             onClick={onNewGroup}

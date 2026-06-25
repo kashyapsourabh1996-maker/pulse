@@ -503,10 +503,8 @@ export function ChatApp({ me, theme, onToggleTheme, onLogout, onProfileUpdate }:
           />
         ) : (
           <div className="flex-1 flex flex-col items-center justify-center bg-[#f0f2f5] dark:bg-[#222e35] text-center px-6">
-            <div className="w-80 h-80 rounded-full bg-[#25d366]/10 flex items-center justify-center mb-6">
-              <MessageCircle className="w-32 h-32 text-[#25d366]/40" strokeWidth={1} />
-            </div>
-            <h2 className="text-3xl font-light text-[#41525d] dark:text-[#e9edef] mb-3">ZappChat Web</h2>
+            <img src="/pulse-logo.jpg" alt="Pulse" className="w-40 h-40 rounded-3xl object-cover mb-6 opacity-90 shadow-lg" />
+            <h2 className="text-3xl font-light text-[#41525d] dark:text-[#e9edef] mb-3">Pulse Web</h2>
             <p className="text-sm text-[#667781] dark:text-[#8696a0] max-w-md leading-relaxed">
               Send and receive messages without keeping your phone online. Select a chat from the left to start messaging, or create a new conversation.
             </p>
